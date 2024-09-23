@@ -10,8 +10,9 @@ We propose to 1) unified cross-modal contrastive learning, 2) knowledge represen
 
 ## Requirements
 * python>=3.9
-* torch>=1.12 (for mixed precision training)
+* torch>=1.12
 * transformers>=4.24
+* faiss>=1.7
 
 All experiments are run with 1 or 2 A6000 (48GB) GPUs (usually, the larger batch size brings better performance for contrastive learning).
 
