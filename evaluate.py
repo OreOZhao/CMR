@@ -206,7 +206,7 @@ def predict_by_mm_and_img():
                                                 eval_forward=False)
     metrics_mm = {k: round((forward_metrics_mm[k] + backward_metrics_mm[k]) / 2, 4)
                   for k in forward_metrics_mm}
-    logger.info('Averaged metrics mm: {}'.format(metrics_mm))
+    logger.info('Averaged metrics text-mm: {}'.format(metrics_mm))
 
     forward_metrics = eval_single_direction(predictor,
                                             entity_tensor=entity_tensor,
@@ -215,17 +215,17 @@ def predict_by_mm_and_img():
                                              entity_tensor=entity_tensor,
                                              eval_forward=False)
     metrics = {k: round((forward_metrics[k] + backward_metrics[k]) / 2, 4) for k in forward_metrics}
-    logger.info('Averaged metrics: {}'.format(metrics))
+    logger.info('Averaged metrics text-img: {}'.format(metrics))
 
     prefix, basename = os.path.dirname(args.eval_model_path), os.path.basename(args.eval_model_path)
     split = os.path.basename(args.valid_path)
     with open('{}/metrics_{}_{}.json'.format(prefix, split, basename), 'w', encoding='utf-8') as writer:
-        writer.write('forward metrics: {}\n'.format(json.dumps(forward_metrics)))
-        writer.write('backward metrics: {}\n'.format(json.dumps(backward_metrics)))
-        writer.write('average metrics: {}\n'.format(json.dumps(metrics)))
-        writer.write('forward metrics text: {}\n'.format(json.dumps(forward_metrics_mm)))
-        writer.write('backward metrics text: {}\n'.format(json.dumps(backward_metrics_mm)))
-        writer.write('average metrics text: {}\n'.format(json.dumps(metrics_mm)))
+        writer.write('forward metrics text-img: {}\n'.format(json.dumps(forward_metrics)))
+        writer.write('backward metrics text-img: {}\n'.format(json.dumps(backward_metrics)))
+        writer.write('average metrics text-img: {}\n'.format(json.dumps(metrics)))
+        writer.write('forward metrics text-mm: {}\n'.format(json.dumps(forward_metrics_mm)))
+        writer.write('backward metrics text-mm: {}\n'.format(json.dumps(backward_metrics_mm)))
+        writer.write('average metrics text-mm: {}\n'.format(json.dumps(metrics_mm)))
 
 
 def eval_single_direction(predictor: BertPredictor,
@@ -303,7 +303,7 @@ def predict_with_knowledge_store():
         metrics_mm = {k: round((forward_metrics_mm[i][k] + backward_metrics_mm[i][k]) / 2, 4)
                       for k in forward_metrics_mm[i]}
         logger.info('knn lambda: {}'.format(knn_lambda_list[i]))
-        logger.info('Averaged metrics mm: {}'.format(metrics_mm))
+        logger.info('Averaged metrics text-mm: {}'.format(metrics_mm))
 
     forward_metrics = eval_single_direction(predictor,
                                             entity_tensor=entity_tensor,
@@ -316,17 +316,17 @@ def predict_with_knowledge_store():
         metrics = {k: round((forward_metrics[i][k] + backward_metrics[i][k]) / 2, 4)
                    for k in forward_metrics[i]}
         logger.info('knn lambda: {}'.format(knn_lambda_list[i]))
-        logger.info('Averaged metrics: {}'.format(metrics))
+        logger.info('Averaged metrics text-img: {}'.format(metrics))
 
     prefix, basename = os.path.dirname(args.eval_model_path), os.path.basename(args.eval_model_path)
     split = os.path.basename(args.valid_path)
     with open('{}/metrics_{}_{}.json'.format(prefix, split, basename), 'w', encoding='utf-8') as writer:
-        writer.write('forward metrics: {}\n'.format(json.dumps(forward_metrics)))
-        writer.write('backward metrics: {}\n'.format(json.dumps(backward_metrics)))
-        writer.write('average metrics: {}\n'.format(json.dumps(metrics)))
-        writer.write('forward metrics text: {}\n'.format(json.dumps(forward_metrics_mm)))
-        writer.write('backward metrics text: {}\n'.format(json.dumps(backward_metrics_mm)))
-        writer.write('average metrics text: {}\n'.format(json.dumps(metrics_mm)))
+        writer.write('forward metrics text-img: {}\n'.format(json.dumps(forward_metrics)))
+        writer.write('backward metrics text-img: {}\n'.format(json.dumps(backward_metrics)))
+        writer.write('average metrics text-img: {}\n'.format(json.dumps(metrics)))
+        writer.write('forward metrics text-mm: {}\n'.format(json.dumps(forward_metrics_mm)))
+        writer.write('backward metrics text-mm: {}\n'.format(json.dumps(backward_metrics_mm)))
+        writer.write('average metrics text-mm: {}\n'.format(json.dumps(metrics_mm)))
 
 
 if __name__ == '__main__':

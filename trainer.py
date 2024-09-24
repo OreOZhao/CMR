@@ -22,16 +22,6 @@ from dict_hub import build_tokenizer, build_processor, get_entity_dict
 from logger_config import logger
 
 
-class SoftTargetCrossEntropy(nn.Module):
-
-    def __init__(self):
-        super(SoftTargetCrossEntropy, self).__init__()
-
-    def forward(self, x: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
-        loss = torch.sum(-target * F.log_softmax(x, dim=-1), dim=-1)
-        return loss.mean()
-
-
 class Trainer:
 
     def __init__(self, args, ngpus_per_node):
@@ -62,9 +52,6 @@ class Trainer:
 
         # define loss function (criterion) and optimizer
         self.criterion = nn.CrossEntropyLoss().cuda()
-
-        if self.args.nn_loss:
-            self.nn_criterion = SoftTargetCrossEntropy().cuda()
 
         self.optimizer = AdamW([p for p in self.model.parameters() if p.requires_grad],
                                lr=args.lr,
