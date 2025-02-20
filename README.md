@@ -8,6 +8,10 @@ In this paper,
 we study the inductive multimodal knowledge graph completion (IMKGC) task. 
 We propose to 1) unified cross-modal contrastive learning, 2) knowledge representation memorization, and 3) semantic-neighbor retrieval-enhanced inference, for effective IMKGC.
 
+
+[UPDATE 2025.2.20]: Entity images uploaded to BaiduNetDisk [MKG_img](https://pan.baidu.com/s/1cbexBtCwxiXM8MeDUvNpRg), code: 4xmv.
+
+
 ## Requirements
 * python>=3.9
 * torch>=1.12
@@ -25,6 +29,8 @@ The entity descriptions are from [KG-BERT](https://github.com/yao8839836/kg-bert
 The entity images are from [MMKB](https://github.com/mniepert/mmkb), [RSME](https://github.com/wangmengsd/RSME), or [MKGformer](https://github.com/zjunlp/MKGformer).
 
 Since some entities from the above sources have no image, we manually crawl their images from 1) [Wikidata](https://www.wikidata.org), 2) Google/Bing Search their names with the help of [icrawler](https://github.com/hellock/icrawler).
+
+The entity images of Freebase and WordNet can be found in BaiduNetDisk [MKG_img](https://pan.baidu.com/s/1cbexBtCwxiXM8MeDUvNpRg), code: 4xmv.
 
 The PLM is `bert-base-uncased` and `vit-base-patch16-224` from [huggingface](https://huggingface.co/). 
 
